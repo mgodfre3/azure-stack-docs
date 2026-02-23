@@ -1,0 +1,141 @@
+---
+title: Create and Restore Data Disk Snapshots of Azure Local
+description: Learn how to create snapshots from a data disk and restore a new disk from a snapshot on multi-rack deployments of Azure Local.
+author: alkohli
+ms.author: alkohli
+ms.reviewer: dramasamy
+ms.date: 02/23/2026
+ms.topic: how-to
+ms.subservice: multi-rack
+#customer intent: As an Azure Local administrator for multi-rack deployments, I want to create and restore data disk snapshots so that I can back up and recover data disks.
+---
+
+# Create and restore data disk snapshots on Azure Local
+
+Disk snapshots let you capture a point-in-time copy of a data disk so that you can recover data or quickly provision new disks from a known-good state. This article walks you through creating a snapshot from an existing data disk and restoring a new disk from that snapshot on Azure Local.
+
+> [!NOTE]
+> This article covers data disk snapshots only. OS disk snapshot and restore isn't included in this release.
+
+## Prerequisites
+
+Before you begin, make sure you have the following prerequisites in place:
+
+- A custom location for your Azure Local instance. The custom location also appears on the **Overview** page for Azure Local.
+- A data disk to use as the source for creating a snapshot.
+
+## Supported and unsupported data disk snapshot scenarios
+
+- Only crash-consistent disk snapshots are supported.
+- Live VM state (memory/CPU) and app-consistent snapshots aren't supported.
+- Full VM snapshot with all disks in a single operation isn't supported. Snapshots are disk-level, not VM-level.
+
+## Install or verify the Azure CLI extension
+
+The `az stack-hci-vm` commands are provided by the `stack-hci-vm` Azure CLI extension.
+
+1. Verify your Azure CLI version (the extension metadata requires Azure CLI core version 2.15.0 or later):
+
+   ```azurecli
+   az version
+   ```
+
+1. Install the extension (or update it if it's already installed):
+
+   ```azurecli
+   az extension add --name stack-hci-vm
+   ```
+
+1. Verify the extension is installed:
+
+   ```azurecli
+   az extension show --name stack-hci-vm
+   ```
+
+## Sign in and set subscription
+
+Before you run any commands, sign in to Azure and select the subscription that contains your Azure Local resources.
+
+1. Sign in:
+
+   ```azurecli
+   az login --use-device-code
+   ```
+
+1. Set your subscription:
+
+   ```azurecli
+   az account set --subscription <Subscription ID>
+   ```
+
+## Create a snapshot from a data disk
+
+Use `az stack-hci-vm snapshot create` to create a snapshot from a source disk.
+
+```azurecli
+az stack-hci-vm snapshot create --resource-group <resource-group> --custom-location <custom-location-arm-id> --location <location> --name <snapshot-name> --source-resource-id </subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{diskName}>
+```
+
+## List existing snapshots
+
+To view snapshots in a specific resource group, run the following command:
+
+```azurecli
+az stack-hci-vm snapshot list --resource-group <resource-group>
+```
+
+To list snapshots in the subscription:
+
+```azurecli
+az stack-hci-vm snapshot list
+```
+
+## View snapshot details
+
+To view the properties of a specific snapshot, run the following command:
+
+```azurecli
+az stack-hci-vm snapshot show --resource-group <resource-group> --name <snapshot-name>
+```
+
+## Update snapshot tags
+
+After a snapshot is created, only its tags can be updated. Use tags to organize and categorize your snapshots.
+
+```azurecli
+az stack-hci-vm snapshot update --resource-group <resource-group> --name <snapshot-name> --tags <key>=<value> <key>=<value>
+```
+
+## Restore a new data disk from a snapshot
+
+To restore a disk from a snapshot, create a new disk by specifying the snapshot ARM ID in `--source-resource-id`.
+
+```azurecli
+az stack-hci-vm disk create --resource-group <resource-group> --custom-location <custom-location-arm-id> --location <location> --name <new-disk-name> --source-resource-id </subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.AzureStackHCI/snapshots/{snapshotName}>
+```
+
+## Validate the restored disk
+
+After the disk restore completes, verify that the new disk was created successfully and is available in your resource group.
+
+```azurecli
+az stack-hci-vm disk show --resource-group <resource-group> --name <new-disk-name>
+```
+
+You can also list disks in the resource group:
+
+```azurecli
+az stack-hci-vm disk list --resource-group <resource-group>
+```
+
+## Clean up resources
+
+If you no longer need a snapshot, you can delete it to free up resources. Deleting a snapshot doesn't affect any disks that were already restored from it.
+
+```azurecli
+az stack-hci-vm snapshot delete --resource-group <resource-group> --name <snapshot-name>
+```
+
+<!--## Related content
+
+- [Troubleshoot Azure Local VM issues]()-->
