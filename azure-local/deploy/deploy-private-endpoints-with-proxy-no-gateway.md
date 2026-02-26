@@ -77,17 +77,25 @@ For more information about Azure private endpoints on Azure Local and the suppor
 - Without proxy settings, VM traffic uses the VM's LNET default gateway.
 - Proxy details set during VM creation are applied as environment variables. Any WinInet or WinHTTP proxy settings for Windows must be configured within the VM.
 
-### Private endpoints considerations for deploying Azure Local with proxy (no Arc Gateway)
+### Considerations for private endpoints when deploying Azure Local with proxy and without Arc gateway
 
-#### Key Vault private endpoints: (vault.azure.net)
+#### Key vault private endpoints: (vault.azure.net)
 
-Azure Local deployment requires a Key Vault, which can use a private endpoint. However, you must enable public access during initial deployment so the Azure portal and HCI RP can configure secrets. After deployment, restrict access to private networks only.
+Azure Local deployment requires a key vault, which can use a private endpoint. However, you must enable public access during initial deployment so the Azure portal and Azure Local resource provider (RP) can configure secrets. After deployment, restrict access to private networks only.
 
 #### Storage account private endpoints:(blob.core.windows.net)
 
-A Storage Account is needed for a two-node Azure Local deployment. You can use a private endpoint but keep public access open until setup is complete so that Azure portal and HCI RP can configure cloud witness. Restrict access to private networks once deployment finishes.
+Azure Local with two nodes requires a Storage Account for deployment. You can use a private endpoint but keep public access open until setup is complete so that Azure portal and Azure Local RP can configure cloud witness. Restrict access to private networks once deployment finishes.
 
 #### Azure Container Registry private endpoints for AKS: (azurecr.io)
 
 For AKS workloads, customers often pull images from ACR private endpoints. During deployment, add specific ACR FQDNs to your proxy bypass list. Wildcards like \*.azurecr.io aren't supported because Arc resource bridge VMs require access to specific ACR endpoints, affecting both AKS and Arc resource bridge traffic.
 
+
+## Next steps
+
+Learn more about using private endpoints with Azure Local in other scenarios:
+
+- [Deploy Azure Local without an enterprise proxy but with an Arc gateway](./deploy-private-endpoints-no-proxy-with-gateway.md).
+- [Deploy Azure Local without an enterprise proxy and without an Arc gateway](./deploy-private-endpoints-no-proxy-no-gateway.md).
+- [Deploy Azure Local with both an enterprise proxy and an Arc gateway](./deploy-private-endpoints-with-proxy-with-gateway.md).
