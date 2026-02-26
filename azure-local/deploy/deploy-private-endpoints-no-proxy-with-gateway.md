@@ -34,13 +34,13 @@ For more information about Azure private endpoints on Azure Local and the suppor
 
     These defaults configure the Arc Resource Bridge VM proxy during Azure Local deployment. However, during Arc Resource Bridge VM deployment, you change the proxy server inside the VM to be the Azure Local Cluster IP on port 40343 instead of using `localhost:40343`.
 
-###  Outbound Connectivity for Azure Local hosts
+### Outbound connectivity for Azure Local hosts
 
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-with-gateway/image9.png" alt-text="Scenario with no proxy and with Arc gateway.":::
 
 **Diagram legend**:
 - 10.0.0.0/16 is an example of a private network where you can configure the private endpoint.
-- During Arc registration, the customer doesn't specify any enterprise proxy server or proxy bypass list. However, the Arc registration script automatically configures the host HTTPS proxy to become `http://localhost:40343`. This is the Arc proxy address the host uses to funnel all HTTPS traffic over the Arc gateway tunnel.
+- During Arc registration, you don't specify any enterprise proxy server or proxy bypass list. However, the Arc registration script automatically configures the host HTTPS proxy to become `http://localhost:40343`. This is the Arc proxy address the host uses to funnel all HTTPS traffic over the Arc gateway tunnel.
 - Azure Local hosts send HTTP traffic directly to the enterprise firewall because Arc gateway doesn't support HTTP.
 - All Azure Local hosts send HTTPS outbound traffic to the Arc proxy.
   - If the endpoints are allowed by Arc gateway, the traffic goes directly to the Arc gateway in Azure and from there it reaches the corresponding Azure service endpoint.
@@ -49,9 +49,9 @@ For more information about Azure private endpoints on Azure Local and the suppor
 - Enterprise firewall routes public endpoints over internet.
 - Enterprise firewall routes private endpoints over Azure ExpressRoute or S2S VPN.
 
-### Outbound Connectivity for Arc Resource Bridge VM
+### Outbound connectivity for Arc resource bridge VM
 
-:::image type="content" source="media/deploy-private-endpoints-no-proxy-with-gateway/image10.png" alt-text="A diagram of a company AI-generated content may be incorrect.":::
+:::image type="content" source="media/deploy-private-endpoints-no-proxy-with-gateway/image10.png" alt-text="A diagram of a company network showing how outbound connectivity works for an Arc resource bridge VM.":::
 
 **Diagram legend**:
 
@@ -68,7 +68,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
 - Enterprise firewall routes public endpoints over internet.
 - Enterprise firewall routes private endpoints over Azure ExpressRoute or S2S VPN.
 
-### Outbound Connectivity for AKS clusters control plane and worker VMs
+### Outbound connectivity for AKS clusters control plane and worker VMs
  
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-with-gateway/image11.png" alt-text="A diagram of a diagram AI-generated content may be incorrect.":::
 
@@ -78,7 +78,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
 
 - If you deploy new AKS clusters in Azure Local, the AKS cluster control plane VMs and worker VMs inherit the Arc resource bridge proxy and bypass list configuration. If AKS workloads require access to some private endpoint such as Azure Container Registries, add those endpoints to the Environment Variables proxy bypass list after Arc registration but before starting the Azure Local deployment. For example, if you want to add a specific Azure Container Registry endpoint to be used by AKS workloads, append such endpoint to the existing bypass list
 
-  - “localhost,127.0.0.1,0.0.0.0,kubernetes.default.svc,.svc.cluster.local,.svc,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,**<u>customerACR.azureio.cr</u>**”
+  - `localhost,127.0.0.1,0.0.0.0,kubernetes.default.svc,.svc.cluster.local,.svc,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,<u>customerACR.azureio.cr</u>`
 
   - This configuration is particularly important for scenarios where AKS clusters are running on their own LNET and you want the ACR traffic to go directly from the AKS subnet to the enterprise firewall. If you don't add the endpoint to the Environment Variables bypass list after Arc registration, the Arc proxy running on the host on the management network sends the request and the firewall must be configured to allow the request from the host.
 
