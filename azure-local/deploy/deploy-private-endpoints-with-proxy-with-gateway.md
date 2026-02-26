@@ -47,7 +47,9 @@ The bypass list for Environment Variables is automatically constructed by using 
 
 This proxy and bypass list configuration in Environment Variables is used to configure the proxy inside Arc resource bridge VM during Azure Local deployment.
 
-:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image12.png" alt-text="Scenario with proxy and with Arc gateway.":::Outbound Connectivity for Azure Local hosts:
+### Outbound connectivity for Azure Local hosts
+
+:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image12.png" alt-text="Scenario with proxy and with Arc gateway.":::
 
 **Diagram legend**:
 
@@ -55,53 +57,39 @@ This proxy and bypass list configuration in Environment Variables is used to con
 - During Arc registration, you specify the enterprise proxy and the proxy bypass list. The Arc registration script automatically configures the host HTTPS proxy to become `http://localhost:40343` because Arc gateway is enabled. This proxy is the Arc proxy address the host uses to funnel all HTTPS traffic over the Arc gateway tunnel.
 - The HTTP proxy is set to use the enterprise proxy. Azure Local hosts send HTTP traffic to the enterprise proxy because Arc gateway doesn't support HTTP.
 - All Azure Local hosts send HTTPS outbound traffic to the Arc proxy except the endpoints added to the proxy bypass list.
-
   - If the endpoints are allowed by Arc gateway, the traffic goes directly to the Arc gateway in Azure and from there it reaches the corresponding Azure service endpoint.
-
   - If the endpoints aren't allowed by Arc gateway, Arc proxy retries the connection to the endpoint over the enterprise proxy. Third party endpoints traffic such as OEM endpoints follow this path. Private endpoints also follow this path if they're not added to the proxy bypass list.
-
 - Azure Local Hosts HTTPS traffic that isn't allowed by Arc gateway and is sent to the enterprise proxy must be allowed if the endpoint is legit and required.
-
 - From the enterprise proxy, the non-allowed Arc gateway traffic is then routed to the enterprise firewall, which routes the traffic to public internet or to the private endpoints over Azure ExpressRoute or S2S VPN.
 
-:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image13.png" alt-text="A diagram of a flowchart AI-generated content may be incorrect.":::Outbound Connectivity for Arc resource bridge VM:
+### Outbound connectivity for Arc resource bridge VM
+
+:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image13.png" alt-text="A diagram of a flowchart AI-generated content may be incorrect.":::
 
 **Diagram legend**:
 
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - You use environment variables proxy and bypass list configuration on Azure Local nodes to configure the proxy inside the Arc resource bridge VM.
-
-<!-- -->
-
 - Arc resource bridge has specific endpoints and subnets requirements that must be added to the proxy bypass list. This requirement is automatically handled during deployment, and the following endpoints are added to the customer defined proxy bypass list :
 
   - `localhost,127.0.0.1,0.0.0.0,kubernetes.default.svc,.svc.cluster.local,.svc,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16`
 
 - Because Arc gateway is enabled during Arc registration, the Arc resource bridge VM proxy server automatically sets to use the Azure Local Cluster IP on port 40343 and the proxy bypass list uses the environment variables values.
-
 - Arc resource bridge VM sends HTTPS outbound traffic to the cluster IP proxy except those endpoints added to the Environment Variables proxy bypass list. Then the traffic is sent to the Arc proxy and behaves as follows:
-
   - If HTTPS endpoint is allowed by Arc gateway, the traffic goes over the tunnel to the Azure services endpoints.
-
   - If Arc gateway doesn't allow an HTTPS endpoint, Arc proxy retries the connection and sends the traffic directly to the enterprise proxy.
-
   - Arc proxy sends HTTPS bypassed endpoints directly to the enterprise firewall. The firewall routes the traffic to public internet or to the private endpoints over Azure ExpressRoute or S2S VPN.
-
 - Arc resource bridge VM HTTP traffic goes directly to the enterprise proxy.
-
 - From the enterprise proxy, traffic goes to the enterprise firewall. The firewall routes the traffic to public internet or to the private endpoints over Azure ExpressRoute or S2S VPN.
 
-:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image14.png" alt-text="A diagram of a diagram AI-generated content may be incorrect.":::Outbound Connectivity for AKS clusters control plane and worker VMs:
+
+
+### Outbound connectivity for AKS clusters control plane and worker VMs
+
+:::image type="content" source="media/deploy-private-endpoints-with-proxy-with-gateway/image14.png" alt-text="A diagram of a diagram AI-generated content may be incorrect.":::
 
 **Diagram legend**:
-
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - If you deploy new AKS clusters in Azure Local, the AKS cluster control plane VMs and Worker VMs inherit the Arc resource bridge proxy and bypass list configuration. If AKS workloads require access to some private endpoint such as Azure Container Registries, add those endpoints to the proxy bypass list during Arc registration. For example, if you want to add a specific Azure Container Registry endpoint to be used by AKS workloads, append such endpoint to the proxy bypass list
   - This requirement is particularly important for scenarios where AKS clusters run on their own LNET and you want the ACR traffic to go directly from the AKS subnet to the enterprise firewall. If you don't add the endpoint to the proxy bypass list during Arc registration, the Arc proxy running on the host on the management network sends the request and the firewall must be configured to allow the request from the host.
 - Because Arc gateway is enabled during Arc registration, the AKS Clusters inherit the proxy and proxy bypass list configuration from Arc resource bridge, so proxy server is automatically set to use the Azure Local Cluster IP on port 40343
@@ -116,11 +104,8 @@ This proxy and bypass list configuration in Environment Variables is used to con
 ### Outbound connectivity for Azure Local VMs
 
 - Azure Local VMs can have their own proxy and Arc gateway configuration independent from the hosts. Azure Local hosts configuration doesn't create any dependency.
-
 - If Azure Local VMs don't have proxy configuration, the traffic goes over the defined LNET default gateway.
-
 - You can configure Arc gateway independently for Azure Local VMs regardless of whether the infrastructure uses it.
-
 - Azure Local VMs can use the same or different Arc gateway from the hosts.
 
 ### Private endpoints considerations when deploying Azure Local with proxy and Arc gateway
@@ -146,3 +131,12 @@ Arc gateway doesn't allow the Azure Site Recovery private endpoints FQDNs. That 
 - **Option 2: Outbound path for Azure Site Recovery private endpoints: Include the FQDNs to the proxy bypass list.** If you add the FQDNs to the proxy bypass list, the traffic goes directly to your firewall and then to the private endpoint via express route according to your routing policies.
 
 If you plan to use Azure Site Recovery in Azure Local to protect your workloads, make sure you configure the private endpoints as described in this article. [Enable replication for private endpoints in Azure Site Recovery](/azure/site-recovery/azure-to-azure-how-to-enable-replication-private-endpoints)
+
+
+## Next steps
+
+Learn more about using private endpoints with Azure Local in other scenarios:
+
+- [Deploy Azure Local with an enterprise proxy but without an Arc gateway](./deploy-private-endpoints-with-proxy-no-gateway.md).
+- [Deploy Azure Local without an enterprise proxy but with an Arc gateway](./deploy-private-endpoints-no-proxy-with-gateway.md).
+- [Deploy Azure Local without an enterprise proxy and without an Arc gateway](./deploy-private-endpoints-no-proxy-no-gateway.md).
