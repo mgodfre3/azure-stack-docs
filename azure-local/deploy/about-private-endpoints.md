@@ -4,7 +4,7 @@ description: Review how Azure Private Endpoints can be used when deploying Azure
 author: alkohli
 ms.author: alkohli
 ms.reviewer: alkohli
-ms.date: 02/18/2026
+ms.date: 02/26/2026
 ms.topic: concept-article
 ---
 
@@ -45,10 +45,20 @@ For example, if your private endpoint has an IP from an Azure subnet 10.244.1.0/
 
 This table summarizes key points for using supported private endpoints with Azure Local.
 
-| Scenario | private endpoints outbound path | Arc Private Link Support | Supported private endpoint Types | Key Requirements / Limitations |
-|----|----|:--:|:--:|----|
-| **1. No Proxy, No Arc Gateway** | Direct. Routed via Express Route or S2S VPN | No | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing and DNS for private endpoints; no proxy bypass needed |
-| **2. Proxy, No Arc Gateway** | Proxy bypassed. Routed via Express Route or S2S VPN | No | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and proxy bypass list for private endpoint FQDNs |
-| **3. No Proxy, Arc Gateway** | AKS Cluster IP Proxy bypassed. Routed via Express Route or S2S VPN | No | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and environment variables for AKS/Arc resource bridge after Arc registration to bypass private endpoint FQDNs |
-| **4. Proxy, Arc Gateway** | Proxy bypassed. Routed via Express Route or S2S VPN | No | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and proxy bypass for private endpoint FQDNs |
+> [!NOTE]
+> Azure Local doesn't support Azure Arc Private Link for all the tabulated scenarios, and Azure Local infrastructure (nodes and Arc resource bridge VM) must use public Arc endpoints. 
 
+| Scenario | Private endpoint outbound path | Supported private endpoint types | Key requirements or limitations |
+|----|----|:--:|:--:|----|
+| **1. No Proxy, no Arc Gateway** | Direct. Routed via Express Route or S2S VPN | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing and DNS for private endpoints; no proxy bypass needed |
+| **2. With proxy, no Arc Gateway** | Proxy bypassed. Routed via Express Route or S2S VPN | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and proxy bypass list for private endpoint FQDNs |
+| **3. No Proxy, with Arc Gateway** | AKS Cluster IP Proxy bypassed. Routed via Express Route or S2S VPN | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and environment variables for AKS/Arc resource bridge after Arc registration to bypass private endpoint FQDNs |
+| **4. With proxy, with Arc Gateway** | Proxy bypassed. Routed via Express Route or S2S VPN | Storage, SQL, Key Vault, Azure Container Registry and other PaaS services supporting Private Link | Configure routing, DNS and proxy bypass for private endpoint FQDNs |
+
+## Related steps
+
+Learn how to deploy Azure private endpoints for Azure Local in the following scenarios:
+- [Deploy Azure Local with private endpoints, and without proxy, without Arc gateway](deploy-about-private-endpoints-no-proxy.md)
+- [Deploy Azure Local with private endpoints, and with proxy, without Arc gateway](deploy-about-private-endpoints-proxy.md)
+- [Deploy Azure Local with private endpoints and without proxy, with Arc gateway](deploy-about-private-endpoints-arc-gateway.md)
+- [Deploy Azure Local with private endpoints, with proxy, with Arc gateway](deploy-about-private-endpoints-proxy-arc-gateway.md)
