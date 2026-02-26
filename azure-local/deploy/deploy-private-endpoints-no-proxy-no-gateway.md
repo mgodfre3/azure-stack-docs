@@ -1,117 +1,91 @@
 ---
-title: Use Private Endpoints with Azure Local for No Proxy No Gateway
-description: Review how Azure Private Endpoints can be used when deploying Azure Local, without an enterprise proxy and without an Arc gateway.
+title: Use Azure Private Endpoints with Azure Local for No Proxy No Arc Gateway Scenario
+description: Review how Azure private endpoints can be used when deploying Azure Local, without an enterprise proxy and without an Arc gateway.
 author: alkohli
 ms.author: alkohli
 ms.reviewer: alkohli
-ms.date: 02/18/2026
+ms.date: 02/26/2026
 ms.topic: concept-article
 ---
 
-# Use private endpoints with Azure Local for no proxy and no Arc gateway scenario
+# Use Azure private endpoints with Azure Local for no proxy and no Arc gateway scenario
 
-This article provides an overview of how you can integrate both existing and new Azure private endpoints with Azure Local. A private endpoint for Azure Local is a network interface that uses a private IP address from the virtual network associated with your Azure Local.
+This article provides an overview of how you can integrate both Azure private endpoints with Azure Local in a scenario without an enterprise proxy and without an Arc gateway. A private endpoint for Azure Local is a network interface that uses a private IP address from the virtual network associated with your Azure Local.
 
 Currently, Azure Local offers the following distinct methods for outbound connectivity:
-
 - Deploy Azure Local without an enterprise proxy and without an Arc gateway.
-
 - Deploy Azure Local with an enterprise proxy but without an Arc gateway.
-
 - Deploy Azure Local without an enterprise proxy but with an Arc gateway.
-
 - Deploy Azure Local with both an enterprise proxy and an Arc gateway.
 
-Each of these scenarios is described in the subsequent sections of this article.
+For more information about Azure private endpoints on Azure Local and the supported scenarios, see [About Azure private endpoints on Azure Local](./about-private-endpoints.md).
 
 
-## Scenario 1: No Proxy, No Arc Gateway
+## About Azure private endpoint scenario without proxy and without Arc gateway
 
-**Description:** Azure Local infrastructure sends HTTP and HTTPS traffic directly via the default route without a proxy or Arc gateway. Enterprise firewall or router can redirect this traffic to various subnets using the public internet or Azure ExpressRoute. Customers must define permitted endpoints on their firewall according to destination needs.
+**Description:** Azure Local infrastructure sends HTTP and HTTPS traffic directly via the default route without a proxy or without an Arc gateway. Enterprise firewall or router can redirect this traffic to various subnets using the public internet or Azure ExpressRoute. You must define permitted endpoints on your firewall according to destination needs.
+
+
+### Outbound connectivity for Azure Local hosts
 
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image1.png" alt-text="Scenario with no proxy and no Arc gateway.":::Outbound Connectivity for Azure Local hosts:
 
 **Diagram legend**:
 
 - LNET = Logical Network
-
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - HTTP/HTTPS outbound traffic uses the management network's default route.
-
 - Public endpoints go through the enterprise firewall to the internet.
-
 - Private endpoints are routed by the enterprise firewall via Azure ExpressRoute or S2S VPN.
+
+### Outbound connectivity for Arc resource bridge VM
 
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image2.png" alt-text="A blue and purple rectangle with text AI-generated content may be incorrect.":::Outbound Connectivity for Arc Resource Bridge VM:
 
 **Diagram legend**:
 
 - LNET = Logical Network
-
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - HTTP/HTTPS outbound traffic uses the management network's default route.
-
 - Public endpoints go through the enterprise firewall or router to the internet.
-
 - Private endpoints are routed by the enterprise firewall via Azure ExpressRoute or S2S VPN.
+
+### Outbound connectivity for AKS clusters and worker VMs
 
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image3.png" alt-text="A blue and purple text and a white rectangle AI-generated content may be incorrect.":::Outbound Connectivity for AKS clusters control plane and worker VMs:
 
 **Diagram legend**:
 
 - LNET = Logical Network
-
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - When the AKS cluster LNET shares the management network, HTTP and HTTPS outbound traffic follow the default route of the management network.
-
 - If the AKS cluster LNET is separate from the management network, HTTP and HTTPS outbound traffic use the default route of the AKS subnet.
-
 - The enterprise firewall or router directs public endpoint traffic over the internet.
-
 - For private endpoints, the enterprise firewall sends traffic through Azure ExpressRoute or an S2S VPN.
+
+### Outbound connectivity for Azure Local VMs
 
 :::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image4.png" alt-text="A blue and purple line with words AI-generated content may be incorrect.":::Outbound Connectivity for Azure Local VMs:
 
 **Diagram legend**:
 
 - LNET = Logical Network
-
 - 10.0.0.0/16 is just an example of a private network where you can configure the private endpoint.
-
-<!-- -->
-
 - Azure Local VMs can have independent proxy and Arc gateway settings that don't relate to the host configuration.
-
 - VMs on Azure Local hosts can run with or without their own proxy setup.
-
 - Without proxy settings, VM traffic uses the VM's LNET default gateway.
-
 - The proxy details you set during VM creation are applied as environment variables. If you need to configure any WinInet or WinHTTP proxy settings for Windows, you must do so within the VM. For Linux VMs, you might also need to provide additional proxy settings.
 
-### Private endpoints considerations when deploying Azure Local without proxy and without Arc gateway
+### Considerations for private endpoint deployment on Azure Local
 
-*Key Vault private endpoints (vault.azure.net):*
+- **Key Vault private endpoints (vault.azure.net):** Azure Local needs a Key Vault for deployment that can use a private endpoint. Keep the public access enabled during the deployment as the Azure portal and Azure Local resource provider configure the key vault secrets.
 
-Azure Local needs a Key Vault for deployment, and it can use a private endpoint. Keep public access enabled until deployment finishes, as the Azure portal and HCI RP configure the Key Vault secrets.
-
-*Storage account private endpoints (blob.core.windows.net):*
-
-Azure Local with two nodes requires a Storage Account for deployment. You can use a private endpoint for this Storage Account, but you must allow public access until the initial deployment is complete. Azure portal and HCI RP need to configure the cloud witness during deployment. Once deployment is completed, you can restrict Storage Account access to only allow private networks.
+- **Storage account private endpoints (blob.core.windows.net):** An Azure Local instance with two nodes requires a storage account for deployment that can use a private endpoint. Keep the public access until the initial deployment is complete. Azure portal and Azure Local resource provider need to configure the cloud witness during deployment. Once the deployment is complete, you can restrict the storage account access to only private networks.
 
 ## Next steps
 
-Learn more about using private endpoints with Azure Local in the following scenarios:
+Learn more about using private endpoints with Azure Local in other scenarios:
 
-- [Deploy Azure Local without an enterprise proxy and without an Arc gateway](./deploy-private-endpoints-no-proxy-no-gateway.md).
 - [Deploy Azure Local with an enterprise proxy but without an Arc gateway](./deploy-private-endpoints-with-proxy-no-gateway.md).
 - [Deploy Azure Local without an enterprise proxy but with an Arc gateway](./deploy-private-endpoints-no-proxy-with-gateway.md).
 - [Deploy Azure Local with both an enterprise proxy and an Arc gateway](./deploy-private-endpoints-with-proxy-with-gateway.md).
