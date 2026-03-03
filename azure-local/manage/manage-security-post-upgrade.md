@@ -46,7 +46,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
 
 # [Version 23H2](#tab/23h2)
 
-1. If your servers inherit baseline settings through mechanisms such as GPO, DSC, or scripts, we recommend that you:
+1. If your Azure Local machines inherit baseline settings through mechanisms such as GPO, DSC, or scripts, we recommend that you:
 
     - Remove these duplicate settings from such mechanisms.
     - Alternatively, after you apply the security baseline, [Disable the drift control mechanism](./manage-secure-baseline.md).
