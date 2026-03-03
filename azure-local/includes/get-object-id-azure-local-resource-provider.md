@@ -16,24 +16,22 @@ This object ID for the Azure Local Resource Provider (RP) is unique per Azure te
 
 1. Go to the **Overview** tab and search for `1412d89f-b8a8-4111-b4fd-e82905cbd85d`.
 
-    :::image type="content" source="./media/get-object-id-azure-local-resource-provider/search-resource-provider.png" alt-text="Screenshot showing the search for the Azure Local Resource Provider service principal." lightbox="./media/get-object-id-azure-local-resource-provider/search-resource-provider.png":::
-
 1. Select the Service Principal Name that is listed and copy the **Object ID**.
 
     :::image type="content" source="./media/get-object-id-azure-local-resource-provider/get-object-id.png" alt-text="Screenshot showing the object ID for the Azure Local Resource Provider service principal." lightbox="./media/get-object-id-azure-local-resource-provider/get-object-id.png":::
 
     Alternatively, you can use Azure CLI or PowerShell to get the object ID of the Azure Local RP service principal. Run the following command:
 
-    # [Azure CLI](#tab/azure-cli)
-
-    ```azurecli
-    az ad sp list  --filter "appId eq '1412d89f-b8a8-4111-b4fd-e82905cbd85d'"
-    ```
-
     # [Azure PowerShell](#tab/azure-powershell)
 
     ```powershell
-    Get-AzADServicePrincipal -ApplicationId "1412d89f-b8a8-4111-b4fd-e82905cbd85d"
+    (Get-AzADServicePrincipal -ApplicationId "1412d89f-b8a8-4111-b4fd-e82905cbd85d").Id
+    ```
+
+    # [Azure CLI](#tab/azure-cli)
+
+    ```azurecli
+    az ad sp list --filter "appId eq '1412d89f-b8a8-4111-b4fd-e82905cbd85d'" --query "[0].id" -o tsv
     ```
 
     ---
