@@ -12,10 +12,10 @@ ms.subservice: multi-rack
 
 # Create and restore data disk snapshots on Azure Local
 
-Disk snapshots let you capture a point-in-time copy of a data disk so that you can recover data or quickly provision new disks from a known-good state. This article walks you through creating a snapshot from an existing data disk and restoring a new disk from that snapshot on Azure Local.
+Disk snapshots let you capture a point-in-time copy of a data disk so that you can recover data or quickly provision new disks from a known-good state. This article shows you how to create a snapshot from an existing data disk and restore a new disk from that snapshot on Azure Local.
 
 > [!NOTE]
-> This article covers data disk snapshots only. OS disk snapshot and restore isn't included in this release.
+> This article covers data disk snapshots only. This release doesn't include OS disk snapshot and restore.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ Before you begin, make sure you have the following prerequisites in place:
 
 ## Install or verify the Azure CLI extension
 
-The `az stack-hci-vm` commands are provided by the `stack-hci-vm` Azure CLI extension.
+The `az stack-hci-vm` commands come from the `stack-hci-vm` Azure CLI extension.
 
 1. Verify your Azure CLI version (the extension metadata requires Azure CLI core version 2.15.0 or later):
 
@@ -54,7 +54,7 @@ The `az stack-hci-vm` commands are provided by the `stack-hci-vm` Azure CLI exte
 
 ## Sign in and set subscription
 
-Before you run any commands, sign in to Azure and select the subscription that contains your Azure Local resources.
+Before running any commands, sign in to Azure and select the subscription that contains your Azure Local resources.
 
 1. Sign in:
 
@@ -84,7 +84,7 @@ To view snapshots in a specific resource group, run the following command:
 az stack-hci-vm snapshot list --resource-group <resource-group>
 ```
 
-To list snapshots in the subscription:
+To list snapshots in the subscription, run the following command:
 
 ```azurecli
 az stack-hci-vm snapshot list
