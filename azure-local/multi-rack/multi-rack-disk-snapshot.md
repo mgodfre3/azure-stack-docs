@@ -97,7 +97,9 @@ To view the properties of a specific snapshot, run the following command:
 ```azurecli
 az stack-hci-vm snapshot show --resource-group <resource-group> --name <snapshot-name>
 ```
-Sample output:
+
+Here is an example output:
+
 ```bash
 {
   "extendedLocation": {
@@ -127,6 +129,7 @@ Sample output:
   },
   "type": "microsoft.azurestackhci/snapshots"
 }
+
 ## Update snapshot tags
 
 After a snapshot is created, only its tags can be updated. Use tags to organize and categorize your snapshots.
