@@ -387,7 +387,7 @@ Capabilities:
     ```
     <SaveToPath>\
     ├── AzureLocal\    # Logs from Azure Local cluster nodes
-    └── ALDO\          # Logs from ALDO disconnected operations infrastructure
+    └── ALDO\    # Logs from disconnected operations for Azure Local infrastructure
     ```
 
 - Uses the `SkipAldoLogCollection` parameter to collect logs only from Azure Local host nodes and skip the disconnected operations control plane.
