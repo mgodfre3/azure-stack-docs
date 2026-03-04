@@ -384,7 +384,7 @@ Capabilities:
   
     Example of the log output structure:
 
-    ```console
+    ```
     <SaveToPath>\
     ├── AzureLocal\    # Logs from Azure Local cluster nodes
     └── ALDO\          # Logs from ALDO disconnected operations infrastructure
