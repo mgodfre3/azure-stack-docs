@@ -72,11 +72,12 @@ If you encounter errors, see the [Troubleshooting](#troubleshooting) section.
 
 The KEK is automatically updated every 30 days. At that point, each secret is securely encrypted with the KEK that was in use when you created it. When you next update the secret, it's re-encrypted with the current KEK. 
 If your workloads update secrets regularly, no additional action is required. If your secrets change infrequently, you may optionally choose to re‑write the same secret values every 30 days so they are re‑encrypted with the latest KEK. This is a recommended as per [Kubernetes best practices] (https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted), not a requirement. Even without this step your secrets remain encrypted at rest.
-For larger clusters, consider updating each namespace's secrets in turn, or developing a script or other automation to streamline the process. Please use the command below if you wish to re-encrypt your secrets with the latest KEK:
+Use the command below if you wish to re-encrypt your secrets with the latest KEK:
 
 ```powershell
 kubectl get secrets --all-namespaces -o json | kubectl replace -f - 
 ```
+For larger clusters, consider updating each namespace's secrets in turn, or developing a script or other automation to streamline the process. 
 
 ## Troubleshooting
 
