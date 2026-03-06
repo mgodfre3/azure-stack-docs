@@ -18,7 +18,7 @@ This article explains how to collect logs on-demand for disconnected operations 
 
 ## About on-demand log collection
 
-On-demand log collection involves manually gathering and sending diagnostic logs to Microsoft. These logs are stored in a database accessible to Microsoft Support to help resolve your reported issues. The collected diagnostic data is retained for up to 30 days and managed according to Microsoft's [standard privacy practices](https://www.microsoft.com/en-us/privacy).
+On-demand log collection involves manually gathering and sending diagnostic logs to Microsoft. These logs are stored in an Azure Data Explorer database that Microsoft Support can access to help investigate and resolve your reported issues. The collected diagnostic data is retained for up to 30 days and managed according to Microsoft's [standard privacy practices](https://www.microsoft.com/en-us/privacy).
 
 Log collection helps diagnose and troubleshoot issues in disconnected operations for Azure Local. Use this feature to send logs to Microsoft Support. Logs include details about the disconnected operations environment, such as the management endpoint, integrated runtime, and other components. During log collection, errors might occur due to environmental or tool limitations.
 
