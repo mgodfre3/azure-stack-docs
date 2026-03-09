@@ -30,7 +30,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
     - `http`: ""
     - `bypasslist`: `localhost,.svc,kubernetes.default.svc,.svc.cluster.local,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12`
 
-    These defaults configure the Arc resource bridge VM proxy during Azure Local deployment. However, during Arc resource bridge VM deployment, you change the proxy server inside the VM to be the Azure Local Cluster IP on port 40343 instead of using `localhost:40343`.
+    These defaults configure the Arc resource bridge VM proxy during Azure Local deployment. However, during Arc resource bridge VM deployment, the proxy server configuration inside the Arc resource bridge is automatically changed to the Azure Local Cluster IP on port 40343 instead of using `localhost:40343`.
 
 ### Outbound connectivity for Azure Local hosts
 

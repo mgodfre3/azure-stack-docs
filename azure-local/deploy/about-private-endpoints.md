@@ -4,7 +4,7 @@ description: Review how Azure Private Endpoints can be used when deploying Azure
 author: alkohli
 ms.author: alkohli
 ms.reviewer: alkohli
-ms.date: 03/06/2026
+ms.date: 03/09/2026
 ms.topic: concept-article
 ---
 
@@ -47,7 +47,7 @@ Azure Local infrastructure must always resolve Azure Arc endpoints to public IP 
 - **DNS for Azure PaaS services** - Private endpoints for services such as Key Vaults, Storage Accounts, SQL, Azure Container Registry, or other PaaS offerings alongside Azure Local are supported.
     - DNS infrastructure must resolve the PaaS service FQDN to an internal IP address.
     - Network routing must correctly direct traffic as per the destination:
-        -  To the public internet for public endpoints.
+        -  To the public internet or through Arc gateway for Azure public endpoints.
         -  Through Azure ExpressRoute/Site-to-Site (S2S) VPN for private endpoints.
 
 
