@@ -34,6 +34,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
 ### Outbound connectivity for Arc resource bridge VM
 
 :::image type="content" source="media/deploy-private-endpoints-with-proxy-no-gateway/image6.png" alt-text="A diagram of a company network showing how outbound connectivity works for Arc resource bridge where there is proxy but no Arc gateway." lightbox="media/deploy-private-endpoints-with-proxy-no-gateway/image6.png":::
+
 **Diagram legend**:
 
 - 10.0.0.0/16 is an example of a private network where you can configure the private endpoint.
