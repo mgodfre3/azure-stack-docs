@@ -45,6 +45,7 @@ Azure Local infrastructure must always resolve Azure Arc endpoints to public IP 
     - **Resolution to private IP ranges**: Private IP ranges (10.x.x.x, 192.168.x.x, 172.16.x.x) aren't supported.
 
 - **DNS for Azure PaaS services** - Private endpoints for services such as Key Vaults, Storage Accounts, SQL, Azure Container Registry, or other PaaS offerings alongside Azure Local are supported.
+
     - DNS infrastructure must resolve the PaaS service FQDN to an internal IP address.
     - Network routing must correctly direct traffic as per the destination:
         -  To the public internet or through Arc gateway for Azure public endpoints.
