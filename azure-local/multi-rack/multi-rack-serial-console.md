@@ -142,4 +142,4 @@ Console output is automatically filtered to remove Windows control sequences for
 
 - [Access your Arc-enabled Kubernetes cluster](/azure/azure-arc/kubernetes/cluster-connect?tabs=azure-cli#access-your-cluster-from-a-client-device)
 
-- [Azure CLI `connectedk8s` command reference](/cli/azure/connectedk8s?view=azure-cli-latest)
+- [Azure CLI `connectedk8s` command reference](/cli/azure/connectedk8s)
