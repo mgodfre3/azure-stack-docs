@@ -324,7 +324,7 @@ kubectl get nodes -o custom-columns="NODE:.metadata.name,READY:.status.condition
 
 ## Troubleshoot with a Replace action
 
-Servers contain many physical components that can fail over time. It's important to understand which physical repairs require BMM replacement and when BMM replacement is recommended. The Tenant data isn't modified during replacement as long as `storage-policy="Preserve"` flag is used.
+Servers contain many physical components that can fail over time. It's important to understand which physical repairs require BMM replacement and when BMM replacement is recommended. The impact on tenant data depends on the `--storage-policy` value you choose — see the [Storage policy decision guide](#storage-policy-decision-guide) below to determine the correct value for your scenario.
 
 A hardware validation process is invoked to ensure the integrity of the physical host in advance of deploying the OS image.
 
@@ -346,7 +346,7 @@ Follow these steps to safely replace a BMM after hardware repairs:
 2. **Assess data impact** - If storage components were replaced (SSD/PERC/System board/Backplane), VM data may be lost; migrate VMs before replace
 3. **Choose storage policy** - Select the correct `--storage-policy` value based on your scenario (see [Storage policy decision guide](#storage-policy-decision-guide) below)
 4. **Check BMM health** - Determine if BMM is healthy or unresponsive using [pre-check commands](#infrastructure-pre-check-1)
-5. **Cordon and evacuate** - If BMM is healthy, run `cordon --evacuate "True"`; if failed, skip to replace command
+5. **Cordon and evacuate** - If BMM is unhealthy or unresponsive, skip to step 7. If BMM is healthy, run `cordon --evacuate "True"` to drain workloads, or use `--safeguard-mode None` in step 7 which handles evacuation automatically
 6. **Verify firmware** - Ensure all replaced components meet minimum firmware requirements
 7. **Execute replace** - Run replace command with required parameters (includes hardware validation phase)
 8. **Monitor progress** - Replace includes hardware validation, deprovisioning, provisioning, and cloud init phases (up to 4 hours)
