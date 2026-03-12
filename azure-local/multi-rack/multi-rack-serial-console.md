@@ -91,7 +91,7 @@ The commands in this workflow use these Azure CLI extensions:
 
 ## Sign in
 
-1. Sign in:
+Sign in:
 
    ```azurecli
    az login --use-device-code
