@@ -54,7 +54,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     The new security posture of your servers combines previous settings, new settings, and overlapping settings with updated values.
 
     > [!NOTE]
-    > Microsoft tests and vaildates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
+    > Microsoft tests and validates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
 
 1. When running the following commands, you'll find the documents aren't in place. These cmdlets don't return any output.
 
@@ -84,7 +84,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     The new security posture of your servers combines previous settings, new settings, and overlapping settings with updated values.
 
     > [!NOTE]
-    > Microsoft tests and vaildates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
+    > Microsoft tests and validates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
 
 1. When running the following commands, you'll find the documents aren't in place. These cmdlets don't return any output.
 
