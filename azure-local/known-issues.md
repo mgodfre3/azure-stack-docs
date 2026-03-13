@@ -43,8 +43,8 @@ The following table lists the fixed issues in this release:
 
 |Feature  |Issue    |Comments |
 |---------|---------|---------|
-| Azure Local VMs <!--36356595--> | Infrastructure logical network details do not display DNS servers and VM switch information. DNS servers and VM switch information are now available for infrastructure logical network details.  | |
-| Azure Local VMs <!--36958790--> | L4* GPU was not functional in the 2602 release. This issue is fixed in 2603. L4* GPU now works as expected for AKS Arc clusters on Azure Local.  | |
+| Azure Local VMs <!--36356595--> | Infrastructure logical network details don't display DNS servers and VM switch information. DNS servers and VM switch information are now available for infrastructure logical network details.  | |
+| Azure Local VMs <!--36958790--> | L4* GPU wasn't functional in the 2602 release. This issue is fixed in 2603. L4* GPU now works as expected for AKS Arc clusters on Azure Local.  | |
 | Deployment <!--35378770--> | Fixed issue in deployment wizard where key vault creation during extension installation was blocking forward navigation.  | |
 | Deployment <!--35380820--> | Fixed issue where retrying deployment via the Azure portal would fail.  | |
 | Deployment <!--36430065--> | Added end-of-support banner messages to "Get started" tab for Azure Local instances on OS version 22H2.  | |
