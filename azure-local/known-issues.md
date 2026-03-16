@@ -51,12 +51,11 @@ The following table lists the fixed issues in this release:
 
 ## Known issues
 
-There's no known issue in this release. Any previously known issues have been fixed in subsequent releases.
-
-<!--The following table lists the known issues in this release:
+The following table lists the known issues in this release:
 
 |Feature  |Issue    |Workaround  |
-|---------|---------|------------|-->
+|---------|---------|------------|
+| Update <!--36808734--> | During the update, health checks might report the error: `SBE manifest endpoint not reported by Get-SolutionDiscoveryDiagnosticInfo`. | This is a warning-level error. You can ignore it while running the update. |
 
 
 ## Known issues from previous releases
