@@ -11,7 +11,7 @@ ms.lastreviewed: 03/20/2026
 
 # Simplify network configuration for AKS on Azure Local with Azure Arc gateway (preview)
 
-If you use enterprise proxies to manage outbound traffic, Azure Arc gateway can help simplify the process of enabling connectivity.
+If you use enterprise proxies to manage outbound traffic, Azure Arc gateway can help simplify the process of enabling connectivity. Before using Arc gateway with AKS on Azure Local, ensure you complete the [prerequisites for creating AKS clusters on Azure Local](aks-hci-network-system-requirements.md).
 
 The AKS Arc gateway (currently in preview) lets you:
 
@@ -29,14 +29,13 @@ The Arc gateway works by introducing an Azure resource that serves as a common f
 
 For more information, see [how the Azure Arc gateway works](/azure/azure-local/deploy/deployment-azure-arc-gateway-overview).
 
-## Before you begin
-
-- Ensure you complete the [prerequisites for creating AKS clusters on Azure Local](aks-hci-network-system-requirements.md).
-- If Arc gateway is enabled in your environment, newly created AKS Arc clusters automatically utilize it to simplify network connectivity.
-
 ## Required network endpoints
 
 For the complete list of required URLs and endpoints that must be allowed through your enterprise firewall when using Arc gateway with AKS on Azure Local, see [Azure Local endpoints not redirected through Arc gateway](/azure/azure-local/deploy/deployment-azure-arc-gateway-overview?view=azloc-2603&tabs=portal#azure-local-endpoints-not-redirected).
+
+## Using Arc gateway with AKS clusters
+
+If Arc gateway is enabled in your environment, newly created AKS Arc clusters automatically utilize it to simplify network connectivity.
 
 ## Other scenarios
 
