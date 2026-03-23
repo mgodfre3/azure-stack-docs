@@ -58,7 +58,7 @@ This step applies only if you downloaded the .zip file. You use the *AzureMigrat
 ### Configure the appliance and discover VMs
 
 Once the source appliance is installed, you are ready to [Configure the appliance](/azure/migrate/how-to-set-up-appliance-hyper-v#configure-the-appliance).
-
+1. If needed, you can use a preconfigured Microsoft Entra ID application to register the source appliance. See [Register an Azure Migrate appliance with a preconfigured Microsoft Entra ID application](./migrate-faq.yml) for detailed instructions on how to set this up.
 After the appliance is configured, you start the VM discovery process.
 
 Wait until you have a green checkmark indicating discovery is finished, then go to the Azure portal to review VM inventory.
@@ -165,6 +165,7 @@ This step applies to using a .zip file.
 1. Locate the target key that you previously generated, paste it in the field under **Verification of Azure Migrate project key**, and then select **Verify**.
 
 1. Once the verification is complete, select **Log in** and sign in to your Azure account.
+    1. If needed, you can use a preconfigured Microsoft Entra ID application to register the target appliance. See [Register an Azure Migrate appliance with a preconfigured Microsoft Entra ID application](./migrate-faq.yml) for detailed instructions on how to set this up.
 
 1. Enter the code that is displayed in your Authenticator (or similar) app for MFA authentication.
 
