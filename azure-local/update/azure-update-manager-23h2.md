@@ -50,9 +50,9 @@ To browse for available system updates using Azure Update Manager, follow these 
 1. Sign into [the Azure portal](https://portal.azure.com) and go to **Azure Update Manager**.
 
 2. Under the **Resources** dropdown, select **Azure Local**.
-   - Filter by Subscription, Resource group, Location, Status, Update readiness, Current version, and/or Tags to view a list of systems.
+   - Filter by Subscription, Resource group, Location, Status, Update readiness, Current version, and/or Azure connection to view a list of systems.
 
-3. In the systems list, view the update Status, Update readiness, Current version, and the date and time of the Last successful update.
+3. In the systems list, view the update Status, Update readiness, Current version, the date and time of the Last successful update, and the Azure connection status.
 
     > [!NOTE]
     > It can take up to 15 minutes for system values to update in the Azure portal.
@@ -161,13 +161,13 @@ To view the progress of your update installation, and completion results, follow
     [:::image type="content" source="./media/azure-update-manager/update-progress.png" alt-text="Screenshot to view progress about system updates in Azure Update Manager." lightbox="./media/azure-update-manager/update-progress.png":::](media/azure-update-manager/update-progress.png#lightbox)
 
 
-4. On the **Download updates** tab, review the progress of the download and preparation, and then select **Next**.
+4. On the **Download updates** tab, review the progress of the download and preparation.
 
-5. On the **Check readiness** tab, review the list of readiness checks and their results.
+5. On the **Validate that the system is ready** tab, review the list of readiness checks and their results.
     - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
     - For failed readiness checks, review the details and remediation messages via the links under **Details**. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md#resume-an-update) before proceeding.
 
-6. On the **Install** tab, review the progress of the update installation.
+6. On the **Install updates** tab, review the progress of the update installation.
 
     [:::image type="content" source="./media/azure-update-manager/update-install-progress.png" alt-text="Screenshot to view update progress in Azure Update Manager." lightbox="./media/azure-update-manager/update-install-progress.png":::](media/azure-update-manager/update-install-progress.png#lightbox)
 
