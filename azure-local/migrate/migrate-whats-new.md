@@ -15,6 +15,21 @@ This article lists the various features and improvements that are available in v
 
 [!INCLUDE [hci-applies-to-2503](../includes/hci-applies-to-2503.md)]
 
+## February 2026
+
+This release includes these features and improvements:
+
+- **Secure boot migration support for eligible VMs** - Secure Boot settings are now preserved during migration for eligible UEFI (Generation 2) VMs. If Secure Boot is enabled on the source VM, it remains enabled on Azure Local after migration, helping maintain workload security posture.
+- **Azure portal bug fix** - Resolved a bug in the Azure portal where Azure Local logical networks and storage paths that are in a different subscription than the Azure Local instance were not showing up as options during migration. These resources now show up correctly in the replication wizard.
+
+## January 2026
+
+This release includes these features and improvements:
+
+- **Register new target appliance when original appliance is in a bad state** - You can now register a new target appliance if the original appliance becomes unresponsive or enters a bad state. This allows migrations to continue without requiring a new Azure Migrate project. The 1:1 relationship between source and target appliance in the Azure Migrate project still applies, so the new target appliance will replace the original target appliance for all VMs in the project.
+- **Fix for VM IP address discovery overwrite issue** - Resolved a bug where IP address discovery data for certain VMs was cleared prior to migration due to discovery inconsistencies.
+- **Improved error messaging for static IP migration issues** - Enhanced error messages and validation guidance for scenarios involving static IP address migrations.
+
 ## December 2025
 
 This release includes these features and improvements.

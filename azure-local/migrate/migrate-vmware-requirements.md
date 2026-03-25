@@ -53,7 +53,7 @@ For more information on Azure subscriptions and roles, see [Azure roles, Azure A
 
 |Level|Permissions|
 |-|-|
-|Tenant|Application administrator|
+|Tenant|[Application Developer](https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer)|
 |Subscription|Contributor, User Access Administrator|
 
 For any subscriptions hosting resources used in migration, such as Azure Migrate project subscriptions and target Azure Local instance subscriptions, the **Microsoft.DataReplication** resource provider must be registered. For more information, see [register resource provider](/azure/azure-resource-manager/management/resource-providers-and-types).
@@ -93,6 +93,12 @@ For any subscriptions hosting resources used in migration, such as Azure Migrate
 - You must have only one target appliance per Azure Migrate project for Azure Local migrations. This means you can't use the same Azure Migrate project for a single source appliance to migrate to multiple target appliances across different Azure Local instances.
 
 - In general, Azure Migrate projects must have a 1:1 pairing of only 1 source appliance and 1 target appliance per project.
+
+## Considerations for migrating VMware VMs to Azure Local 
+
+- Azure Migrate will retain the boot type of the VM during migration. If the source VMware VM is using BIOS, the migrated VM on Azure Local will also use BIOS. If the source VMware VM is using UEFI, the migrated VM on Azure Local will also use UEFI.
+
+- This means that BIOS VMs will be created as Hyper-V Generation 1 VMs on Azure Local, and UEFI VMs will be created as Hyper-V Generation 2 VMs on Azure Local. For more information on Generation 1 VM limitations, see [Azure Local VM management](https://learn.microsoft.com/azure/azure-local/manage/azure-arc-vm-management-overview).
 
 ## Next steps
 
