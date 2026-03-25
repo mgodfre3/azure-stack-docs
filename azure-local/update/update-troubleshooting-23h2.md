@@ -38,11 +38,11 @@ This scenario occurs when preparing to install system updates in Azure Update Ma
 
     :::image type="content" source="./media/troubleshoot-updates/update-manager.png" alt-text="Screenshot of Update Manager page." lightbox="./media/troubleshoot-updates/update-manager.png":::
 
-1. Select one or more systems from the list, then select **One-time Update**.  
+1. Select one or more systems from the list, then select **Install now**.  
 
-1. On the **Check readiness** page, review the list of readiness checks and their results.
+1. On the **Check readiness** tab, review the list of readiness checks and their results.
 
-    1. Select the **View details** links under **Affected systems**.
+    1. Select the **View details** links under **Details**.
 
     1. When the details box opens, you can view more details, individual system results, and the **Remediation** for failing health checks.
 
@@ -59,9 +59,9 @@ This scenario occurs when installing and tracking system updates in Azure Update
 
 1. In **History**, select the failed update run from the list.
 
-1. On the **Check readiness** page, review the list of readiness checks and their results.
+1. On the **Check readiness** tab, review the list of readiness checks and their results.
 
-    1. Select the **View details** links under **Affected systems**.
+    1. Select the **View details** links under **Details**.
 
     1. When the details box opens, you can view more details, individual system results, and the **Remediation** for failing health checks.
 
@@ -69,7 +69,7 @@ This scenario occurs when installing and tracking system updates in Azure Update
 
     Follow the remediation instructions to resolve the failures and then select the **Try again** button to retry the pre-update readiness checks and **Resume the update**.
 
-    To further troubleshoot, see the [PowerShell](#powershell) section.
+    To further troubleshoot, see the [PowerShell](#using-powershell) section.
 
 ## Using PowerShell
 
