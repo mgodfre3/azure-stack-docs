@@ -161,7 +161,7 @@ To view the progress of your update installation, and completion results, follow
     [:::image type="content" source="./media/azure-update-manager/update-progress.png" alt-text="Screenshot to view progress about system updates in Azure Update Manager.":::](media/azure-update-manager/update-progress.png#lightbox)
 
 
-4. On the **Download updates** tab, review the progress of the download and preparation, and then select **Next**.
+4. On the **Download updates** tab, review the progress of the download and preparation.
 
 5. On the **Check readiness** tab, review the list of readiness checks and their results.
     - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
